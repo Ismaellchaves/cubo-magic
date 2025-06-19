@@ -1,14 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 	<head>
 		<meta charset="UTF-8" />
-		<title>The Cube</title>
+		<title>O Cubo</title>
 		<meta
 			name="viewport"
 			content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0" />
 		<link rel="stylesheet" href="./style.css" />
+		<style>
+			/* Estilos do Popup */
+			#welcome-popup {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,0.9);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				z-index: 1000;
+				font-family: inherit;
+			}
+			.popup-content {
+				background-color: #111;
+				padding: 30px;
+				border-radius: 15px;
+				max-width: 500px;
+				width: 80%;
+				text-align: center;
+				color: white;
+				border: 2px solid #333;
+				box-shadow: 0 0 20px rgba(255,255,255,0.1);
+			}
+			.popup-content a {
+				color: #4CAF50;
+				text-decoration: none;
+				font-weight: bold;
+				margin: 0 5px;
+			}
+			.popup-content a:hover {
+				text-decoration: underline;
+			}
+		</style>
 	</head>
 	<body>
+		<!-- Popup de Boas-Vindas -->
+		<div id="welcome-popup">
+			<div class="popup-content">
+				<h2>Obrigado por acessar nosso jogo!</h2>
+				<p>Desenvolvido por <a href="https://ismo.netlify.app" target="_blank">ISMO</a></p>
+			</div>
+		</div>
+
 		<div class="ui">
 			<div class="ui__background"></div>
 
@@ -16,53 +60,53 @@
 
 			<div class="ui__texts">
 				<h1 class="text text--title">
-					<span>THE</span>
-					<span>CUBE</span>
+					<span>O</span>
+					<span>CUBO</span>
 				</h1>
-				<div class="text text--note">Double tap to start</div>
+				<div class="text text--note">Toque duplo para começar</div>
 				<div class="text text--timer">0:00</div>
 				<div class="text text--complete">
-					<span>Complete!</span>
+					<span>Completo!</span>
 				</div>
 				<div class="text text--best-time">
 					<icon trophy></icon>
-					<span>Best Time!</span>
+					<span>Melhor tempo!</span>
 				</div>
 			</div>
 
 			<div class="ui__prefs">
-				<range name="size" title="Cube Size" list="2,3,4,5"></range>
+				<range name="size" title="Tamanho do Cubo" list="2,3,4,5"></range>
 				<range
 					name="flip"
-					title="Flip Type"
-					list="Swift&nbsp;,Smooth,Bounce"></range>
-				<range name="scramble" title="Scramble Length" list="20,25,30"></range>
+					title="Tipo de Giro"
+					list="Rápido&nbsp;,Suave,Rebote"></range>
+				<range name="scramble" title="Quantidade de Embaralhamento" list="20,25,30"></range>
 				<range
 					name="fov"
-					title="Camera Angle"
-					list="Ortographic,Perspective"></range>
+					title="Ângulo da Câmera"
+					list="Ortográfica,Perspectiva"></range>
 				<range
 					name="theme"
-					title="Color Scheme"
-					list="Cube,Erno,Dust,Camo,Rain"></range>
+					title="Esquema de Cores"
+					list="Cubo,Erno,Poeira,Camuflagem,Chuva"></range>
 			</div>
 
 			<div class="ui__theme">
-				<range name="hue" title="Hue" color></range>
-				<range name="saturation" title="Saturation" color></range>
-				<range name="lightness" title="Lightness" color></range>
+				<range name="hue" title="Matiz" color></range>
+				<range name="saturation" title="Saturação" color></range>
+				<range name="lightness" title="Luminosidade" color></range>
 			</div>
 
 			<div class="ui__stats">
-				<div class="stats" name="cube-size"><i>Cube:</i><b>3x3x3</b></div>
+				<div class="stats" name="cube-size"><i>Cubo:</i><b>3x3x3</b></div>
 				<div class="stats" name="total-solves">
-					<i>Total solves:</i><b>-</b>
+					<i>Total de resoluções:</i><b>-</b>
 				</div>
-				<div class="stats" name="best-time"><i>Best time:</i><b>-</b></div>
-				<div class="stats" name="worst-time"><i>Worst time:</i><b>-</b></div>
-				<div class="stats" name="average-5"><i>Average of 5:</i><b>-</b></div>
-				<div class="stats" name="average-12"><i>Average of 12:</i><b>-</b></div>
-				<div class="stats" name="average-25"><i>Average of 25:</i><b>-</b></div>
+				<div class="stats" name="best-time"><i>Melhor tempo:</i><b>-</b></div>
+				<div class="stats" name="worst-time"><i>Pior tempo:</i><b>-</b></div>
+				<div class="stats" name="average-5"><i>Média dos 5:</i><b>-</b></div>
+				<div class="stats" name="average-12"><i>Média dos 12:</i><b>-</b></div>
+				<div class="stats" name="average-25"><i>Média dos 25:</i><b>-</b></div>
 			</div>
 
 			<div class="ui__buttons">
@@ -85,19 +129,53 @@
 		</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js"></script>
 		<script src="./script.js"></script>
-
-    <!-- VLibras -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
+		  <!-- VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
     </div>
+  </div>
 
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget("https://vlibras.gov.br/app");
-    </script>
-		
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget();
+  </script>
+		<script>
+			// Controle do Popup
+			document.addEventListener('DOMContentLoaded', function() {
+				const popup = document.getElementById('welcome-popup');
+				
+				// Fechar ao clicar fora
+				popup.addEventListener('click', function(e) {
+					if (e.target === this) {
+						popup.style.display = 'none';
+					}
+				});
+				
+				// Fechar automaticamente após 8 segundos
+				setTimeout(function() {
+					popup.style.display = 'none';
+				}, 8000);
+				
+				// Verificação de acessibilidade
+				if (typeof axe !== 'undefined') {
+					axe.run({
+						exclude: [['#welcome-popup']] // Ignora o popup na verificação
+					});
+				}
+				
+				// Leitor de tela para o popup
+				if ('speechSynthesis' in window) {
+					const msg = new SpeechSynthesisUtterance();
+					msg.text = "Obrigado por acessar nosso jogo. Desenvolvido por Ismaell Chaves, CEO da ISNEX";
+					msg.lang = 'pt-BR';
+					window.speechSynthesis.speak(msg);
+				}
+			});
+
+
+			
+		</script>
 	</body>
 </html>
